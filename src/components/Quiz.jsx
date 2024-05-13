@@ -18,7 +18,7 @@ export default function Quiz() {
     const handleSkipAnswer = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
 
     if (quizIsComplete) {
-        return(
+        return (
             <div id="summary">
                 <img src={quicCompleteImg} alt="Trophy icon" />
                 <h2>Quiz Completed!</h2>
@@ -26,14 +26,18 @@ export default function Quiz() {
         );
     }
 
-    
+
     const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
     shuffledAnswers.sort(() => Math.random() - 0.5);
 
     return (
         <div id="quiz">
             <div id="question">
-                <QuestionTimer timeout={10000} onTimeout={handleSkipAnswer} />
+                <QuestionTimer
+                    key={activeQuestionIndex}
+                    timeout={10000}
+                    onTimeout={handleSkipAnswer}
+                />
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                 <ul id="answers">
                     {shuffledAnswers.map(answer => (
