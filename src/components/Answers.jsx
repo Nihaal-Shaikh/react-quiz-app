@@ -15,7 +15,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
                 const isSelected = selectedAnswer === answer;
                 let cssClasses = '';
 
-                if (answerState === 'anwered' && isSelected) {
+                if (answerState === 'answered' && isSelected) {
                     cssClasses = 'selected';
                 }
 
@@ -23,7 +23,13 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
                     cssClasses = answerState;
                 }
                 return <li key={answer} className="answer">
-                    <button onClick={() => onSelect(answer)} className={cssClasses}>{answer}</button>
+                    <button
+                        onClick={() => onSelect(answer)}
+                        className={cssClasses}
+                        disabled={answerState !== ''}
+                    >
+                        {answer}
+                    </button>
                 </li>
             }
             )}
